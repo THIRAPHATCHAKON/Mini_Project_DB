@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= thread.title %></title>
+</head>
+<body>
+  <h1><%= thread.title %></h1>
+  <p>by <%= thread.author %></p>
+
+  <h2>Posts</h2>
+  <ul>
+    <% thread.posts.forEach(post => { %>
+      <li><strong><%= post.author %>:</strong> <%= post.content %></li>
+    <% }) %>
+  </ul>
+
+  <h3>Add a Post</h3>
+  <form action="/thread/<%= thread.id %>/post" method="POST">
+    <input type="text" name="author" placeholder="Your Name" required>
+    <textarea name="content" placeholder="Write your post..." required></textarea>
+    <button type="submit">Post</button>
+  </form>
+
+  <p><a href="/">Back to Home</a></p>
+</body>
+</html>
