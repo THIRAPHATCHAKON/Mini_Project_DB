@@ -1,135 +1,88 @@
-/* ===== Main area only ===== */
-/* ===== Main area only ===== */
-main.container {
-  max-width: 860px;
-  margin: 40px auto 64px; /* <- เพิ่มระยะห่างจาก header ตรงนี้ (เดิม 24px) */
-  padding: 0 16px;
-}
-
-/* sticky footer layout */
+/* ============ Sticky footer layout ============ */
 html, body { height: 100%; }
-body {
+body{
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: #fafbfc;
 }
-
-/* ให้ main ดัน footer ลงล่าง */
-main.container {
-  flex: 1 0 auto;
-  margin: 40px auto 64px; /* เว้นจาก header ตามที่ตั้งไว้ */
-}
-
+/* ให้คอนเทนต์ดัน footer ลงล่าง (หน้า index นี้ใช้ section#demo-thread) */
+#demo-thread, main { flex: 1 0 auto; }
 /* กัน footer หด */
-.footer-1 { 
-  flex-shrink: 0;
-  padding: 16px 0 32px;
-  color: #6c757d;
+footer { flex-shrink: 0; }
+
+/* ============ Thread Card ============ */
+#demo-thread { margin: 48px auto 56px; }           /* ระยะห่างจาก header/footer */
+#demo-thread .thread-card{
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(0,0,0,.06);
+  overflow: hidden;
+}
+#demo-thread .card-body{ padding: 20px 24px; }
+#demo-thread .card-footer{
+  padding: 16px 24px;
+  background: #fff;
+  border-top: 1px dashed rgba(0,0,0,.14);
 }
 
-@media (max-width: 768px) {
-  main.container {
-    margin-top: 28px; /* มือถือเว้นน้อยลงหน่อย */
-  }
+/* avatar ผู้สร้าง */
+#demo-thread .avatar{
+  width: 44px; height: 44px;
+  background: rgba(13,110,253,.12);
+  color: #0d6efd;
+  font-weight: 700; font-size: .9rem;
 }
 
-/* Headings */
-main.container .text-1 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin: 8px 0 16px;
-}
-
-/* Thread list */
-main.container .ul-1 {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 28px;
-  display: grid;
-  gap: 12px;
-}
-
-main.container .li-1 {
-  padding: 14px 16px;
-  border: 1px solid rgba(0,0,0,.08);
-  border-radius: 12px;
-  background: #ffffff;
-  transition: transform .08s ease, box-shadow .12s ease, border-color .12s ease;
-}
-
-main.container .li-1:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(0,0,0,.06);
-  border-color: rgba(0,0,0,.12);
-}
-
-/* links + meta */
-main.container .a-1 {
-  color: #0d6efd;            /* โทนเดียวกับ Bootstrap primary */
-  text-decoration: none;
-  font-weight: 600;
-  margin-right: 6px;
-}
-main.container .a-1:hover { text-decoration: underline; }
-
-main.container .small-1 {
-  color: #6c757d;
-  font-size: .9rem;
-}
-
-/* Create Thread form */
-main.container .form-1 {
-  display: grid;
-  grid-template-columns: 1fr 1fr auto;
-  gap: 10px;
-  align-items: center;
-  padding: 16px;
-  border: 1px dashed rgba(0,0,0,.15);
-  border-radius: 12px;
-  background: #fafafa;
-}
-
-main.container .input-1 {
-  height: 42px;
-  padding: 8px 12px;
-  border: 1px solid #dee2e6;
-  border-radius: 10px;
-  outline: none;
-  transition: border-color .12s ease, box-shadow .12s ease;
-}
-
-main.container .input-1:focus {
-  border-color: #86b7fe;
-  box-shadow: 0 0 0 .15rem rgba(13,110,253,.15);
-}
-
-main.container .button-1 {
-  height: 42px;
-  padding: 0 16px;
+/* รายการคอมเมนต์ */
+#demo-thread #commentList .list-group-item{
+  background: #f8f9fb;
   border: 0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  transition: background .12s ease;
+}
+#demo-thread #commentList .list-group-item:hover{
+  background: #f1f3f5;
+}
+#demo-thread .comment-actions .btn{
+  --bs-btn-padding-y: .2rem;
+  --bs-btn-padding-x: .5rem;
+}
+
+/* ปุ่ม/ช่องกรอกในฟอร์มคอมเมนต์ */
+#demo-thread #commentForm .form-control{
   border-radius: 10px;
-  background: #0d6efd;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  transition: filter .12s ease, transform .06s ease;
 }
-main.container .button-1:hover { filter: brightness(1.05); }
-main.container .button-1:active { transform: translateY(1px); }
-
-/* Empty state item */
-main.container .li-1:first-child:only-child {
-  text-align: center;
-  color: #6c757d;
-  background: #f8f9fa;
-  border-style: dashed;
+#demo-thread #commentForm .btn{
+  border-radius: 10px;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  main.container { margin-top: 16px; }
-  main.container .form-1 {
-    grid-template-columns: 1fr;
-  }
-  main.container .button-1 { width: 100%; }
+/* จอเล็ก */
+@media (max-width: 768px){
+  #demo-thread { margin-top: 32px; margin-bottom: 48px; }
+}
+
+/* --- ตัวเลือก A: กรอบเข้มขึ้น (ไม่เปลี่ยนพื้นหลัง) --- */
+#demo-thread .thread-card{
+  border: 2px solid rgba(13,110,253,.45);   /* น้ำเงินโทน Bootstrap */
+  box-shadow: 0 12px 26px rgba(13,110,253,.08);
+}
+
+/* --- ตัวเลือก B: พื้นหลังการ์ดนุ่ม ๆ + เส้นคั่นเข้มขึ้น --- */
+#demo-thread .thread-card{
+  border: 2px solid rgba(13,110,253,.35);
+  background: #f7faff;                      /* ฟ้าอ่อน */
+}
+#demo-thread .card-footer{
+  background: #f2f7ff;                      /* ฟ้าอ่อนกว่า */
+  border-top: 2px dashed rgba(13,110,253,.35);
+}
+
+/* เพิ่มคอนทราสต์เล็กน้อยให้รายการคอมเมนต์ */
+#demo-thread #commentList .list-group-item{
+  background: #eef4ff;
+  border: 1px solid rgba(13,110,253,.18);
 }

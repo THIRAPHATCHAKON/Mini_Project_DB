@@ -1,26 +1,140 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title><%= thread.title %></title>
-</head>
-<body>
-  <h1><%= thread.title %></h1>
-  <p>by <%= thread.author %></p>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/index.css" />
+    <title>Mini Forum</title>
+  </head>
 
-  <h2>Posts</h2>
-  <ul>
-    <% thread.posts.forEach(post => { %>
-      <li><strong><%= post.author %>:</strong> <%= post.content %></li>
-    <% }) %>
-  </ul>
+  <body>
+    <%- include('header_user') %>
+    <section class="container my-4" id="demo-thread">
+      <div class="card shadow-sm thread-card">
+        <div class="card-body">
+          <div class="d-flex align-items-start justify-content-between">
+            <div class="d-flex gap-3">
+              <div
+                class="avatar rounded-circle d-flex align-items-center justify-content-center"
+              >
+                AD
+              </div>
 
-  <h3>Add a Post</h3>
-  <form action="/thread/<%= thread.id %>/post" method="POST">
-    <input type="text" name="author" placeholder="Your Name" required>
-    <textarea name="content" placeholder="Write your post..." required></textarea>
-    <button type="submit">Post</button>
-  </form>
+              <div>
+                <h5 class="mb-1" id="threadTitle">Welcome Thread</h5>
+                <div class="text-muted small">
+                  by <span class="fw-semibold" id="threadAuthor">Admin</span> ·
+                  <span id="threadTime">just now</span>
+                </div>
+              </div>
+            </div>
 
-  <p><a href="/">Back to Home</a></p>
-</body>
+            <div class="dropdown">
+              <button
+                class="btn btn-outline-secondary btn-sm dropdown-toggle"
+                data-bs-toggle="dropdown"
+              >
+                Manage
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <button
+                    class="dropdown-item"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editThreadModal"
+                  >
+                    Edit thread
+                  </button>
+                </li>
+                <li>
+                  <button class="dropdown-item text-danger" id="deleteThreadBtn">
+                    Delete thread
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="mt-3 mb-0" id="threadBody">
+            ยินดีต้อนรับสู่ Mini Forum — ลองคอมเมนต์ได้เลย!
+          </p>
+        </div>
+
+        <div class="card-footer bg-white">
+          <h6 class="mb-3">Comments</h6>
+
+          <!-- comment list -->
+          <ul class="list-group list-group-flush mb-3" id="commentList">
+            <!-- will be injected by JS -->
+          </ul>
+
+          <!-- add comment -->
+          <form id="commentForm" class="row g-2 align-items-center">
+            <div class="col-12 col-md-3">
+              <input
+                class="form-control"
+                name="author"
+                placeholder="Your name"
+                required
+              />
+            </div>
+            <div class="col-12 col-md-7">
+              <input
+                class="form-control"
+                name="body"
+                placeholder="Write a comment..."
+                required
+              />
+            </div>
+            <div class="col-12 col-md-2 d-grid">
+              <button class="btn btn-primary">Comment</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Edit Thread Modal -->
+    <div class="modal fade" id="editThreadModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <form class="modal-content" id="editThreadForm">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit thread</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">Title</label>
+              <input class="form-control" id="editTitle" required />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Body</label>
+              <textarea class="form-control" rows="4" id="editBody" required></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Author</label>
+              <input class="form-control" id="editAuthor" required />
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <%- include('footer') %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- ถ้ามีไฟล์ JS ของคอมโพเนนต์นี้ ให้ใช้แบบเสิร์ฟจาก public -->
+    <!-- <script src="/js/thread-demo.js" defer></script> -->
+  </body>
 </html>
